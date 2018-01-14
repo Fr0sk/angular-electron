@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ElectronService } from './providers/electron.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +8,12 @@ import { ElectronService } from './providers/electron.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(public electronService: ElectronService) {
+  constructor(public electronService: ElectronService,
+    private translate: TranslateService) {
 
-    if (electronService.isElectron()) {
+    translate.setDefaultLang('en');
+
+    /*if (electronService.isElectron()) {
       console.log('Mode electron');
       // Check if electron is correctly injected (see externals in webpack.config.js)
       console.log('c', electronService.ipcRenderer);
@@ -17,6 +21,6 @@ export class AppComponent {
       console.log('c', electronService.childProcess);
     } else {
       console.log('Mode web');
-    }
+    }*/
   }
 }

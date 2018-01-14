@@ -1,0 +1,11 @@
+{
+    "verbose": true,
+    "ignore": [
+        "view/*"
+    ],
+    "watch": [
+        "dist/main.js",
+        "dist/src/*"
+    ],
+    "ext": "js"
+}
