@@ -14,13 +14,15 @@
 # Introduction
 
 Bootstrap and package your project with Angular 4(+) and Electron (Typescript + SASS + Hot Reload) for creating Desktop applications.
+Includes Angular Material and Material Icon font.
 
 Currently runs with:
 
-- Angular v4.3.5
-- Angular-CLI v1.4.1
-- Electron v1.7.6
-- Electron Packager v9.0.1
+- Angular v5.2.0
+- Angular-CLI v1.6.4
+- Angular Material 5.0.4
+- Electron v1.7.10
+- Electron Builder v19.52.1
 
 With this sample, you can :
 
@@ -51,16 +53,25 @@ Please follow [Angular-cli documentation](https://github.com/angular/angular-cli
 npm install -g @angular/cli
 ```
 
+## Notes (changes from original project)
+
+The directory structure was tweaked up a bit. Electron code is in the `/src` folder and Angular code is in the `/view` folder.
+
+To reference the root of the project in Electron you should use `app.getAppPath()`, since `__dirname` will point to `/src`.
+
+When using portable builds (at least on Windows), the `app.getAppPath()` and `__dirname` will point to inside the `.asar` in a temporary folder. To get the path where the application was launched (say, to save files within the executable) the environment variable `PORTABLE_EXECUTABLE_DIR` is set on launching. Access it inside the application code using `process.env.PORTABLE_EXECUTABLE_DIR`
+
+
 ## To build for development
 
 - **in a terminal window** -> npm start  
 - **in another terminal window** -> npm run electron:serve
 
-Voila! You can use your Angular + Electron app in a local development environment with hot reload !
+Voila! You can use your Angular + Angular Material + Electron app in a local development environment with hot reload and auto-restart!
 
-The application code is managed by `main.ts`. In this sample, the app runs with a simple Electron window and "Developer Tools" is open.  
-The Angular component contains an example of Electron and NodeJS native lib import. See [Use NodeJS Native libraries](#use-nodejs-native-libraries) charpter if you want to import other native libraries in your project.  
-You can desactivate "Developer Tools" by commenting `win.webContents.openDevTools();` in `main.ts`.
+The application code is managed by `src/main.ts`. In this sample, the app runs with a simple Electron window and "Developer Tools" is open.  
+The Angular code is in the `view/` directory. The component contains an example of Electron and NodeJS native lib import. See [Use NodeJS Native libraries](#use-nodejs-native-libraries) charpter if you want to import other native libraries in your project.  
+You can desactivate "Developer Tools" by commenting `win.webContents.openDevTools();` in `src/main.ts`.
 
 ## To build for production
 
@@ -74,9 +85,9 @@ Your built files are in the /dist folder.
 |Command|Description|
 |--|--|
 |`npm run start:web`| Execute the app in the brower |
-|`npm run electron:linux`| Builds your application and creates an app consumable on linux system |
-|`npm run electron:windows`| On a Windows OS, builds your application and creates an app consumable in windows 32/64 bit systems |
-|`npm run electron:mac`|  On a MAC OS, builds your application and generates a `.app` file of your application that can be run on Ma |
+|`npm run build:linux`| Builds your application and creates an app consumable on linux system |
+|`npm run build:mac`|  On a MAC OS, builds your application and generates a `.app` file of your application that can be run on Ma |
+|`npm run build:win`| On a Windows OS, builds your application and creates an app consumable in windows 32/64 bit systems |
 
 **Your application is optimised. Only the files of /dist folder are included in the executable.**
 
