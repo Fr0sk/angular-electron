@@ -55,11 +55,14 @@ npm install -g @angular/cli
 
 ## Notes (changes from original project)
 
+This project adds [Angular Material](https://material.angular.io/) and [Material Icons](https://material.io/icons/) to ease up making the User Interface. It also has nodemon to restart the app when the Electorn code is changed.
+
 The directory structure was tweaked up a bit. Electron code is in the `/src` folder and Angular code is in the `/view` folder.
 
-To reference the root of the project in Electron you should use `app.getAppPath()`, since `__dirname` will point to `/src`.
+To reference the root of the project in Electron you should use `app.getAppPath()`, since `__dirname` will point to `/src`, although for most cases using `__dirname` will not bring any problems.
 
-When using portable builds (at least on Windows), the `app.getAppPath()` and `__dirname` will point to inside the `.asar` in a temporary folder. To get the path where the application was launched (say, to save files within the executable) the environment variable `PORTABLE_EXECUTABLE_DIR` is set on launching. Access it inside the application code using `process.env.PORTABLE_EXECUTABLE_DIR`
+When using portable builds (at least on Windows), the `app.getAppPath()` and `__dirname` will point to inside the `.asar` in a temporary folder. To get the path where the application was launched (say, to save files within the executable) the environment variable `PORTABLE_EXECUTABLE_DIR` is set on launching. Access it inside the application code using `process.env.PORTABLE_EXECUTABLE_DIR`.
+This last bit is not a change to the original project but rather a tip that took me a while to find (I must say, I was not used to Electron Builder).
 
 
 ## To build for development
